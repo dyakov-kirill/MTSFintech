@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="EqualsTest$WolfTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-01-31T16:48:10" hostname="DESKTOP-Q2L74RK" time="0.019">
+  <properties/>
+  <testcase name="РЎСЂР°РІРЅРµРЅРёРµ СЃ РѕС‚Р»РёС‡Р°СЋС‰РёРјСЃСЏ РѕР±СЉРµРєС‚РѕРј" classname="EqualsTest$WolfTests" time="0.004"/>
+  <testcase name="РЎСЂР°РІРЅРµРЅРёРµ СЃ null" classname="EqualsTest$WolfTests" time="0.002"/>
+  <testcase name="РЎСЂР°РІРЅРµРЅРёРµ СЃ С‚Р°РєРёРј Р¶Рµ РѕР±СЉРµРєС‚РѕРј" classname="EqualsTest$WolfTests" time="0.003"/>
+  <testcase name="РЎСЂР°РІРЅРµРЅРёРµ СЃ СЃР°РјРёРј СЃРѕР±РѕР№" classname="EqualsTest$WolfTests" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

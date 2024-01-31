@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="FindAnimalTest$FindOlderAnimalTests" tests="7" skipped="0" failures="0" errors="0" timestamp="2024-01-31T16:48:10" hostname="DESKTOP-Q2L74RK" time="0.097">
+  <properties/>
+  <testcase name="РџРµСЂРµРґР°С‡Р° null РІ РїР°СЂР°РјРµС‚СЂ" classname="FindAnimalTest$FindOlderAnimalTests" time="0.001"/>
+  <testcase name="РџРµСЂРµРґР°С‡Р° РїСѓСЃС‚РѕРіРѕ СЃРїРёСЃРєР°" classname="FindAnimalTest$FindOlderAnimalTests" time="0.001"/>
+  <testcase name="[1] 0" classname="FindAnimalTest$FindOlderAnimalTests" time="0.035"/>
+  <testcase name="[2] 1" classname="FindAnimalTest$FindOlderAnimalTests" time="0.002"/>
+  <testcase name="[3] 2" classname="FindAnimalTest$FindOlderAnimalTests" time="0.001"/>
+  <testcase name="[4] 3" classname="FindAnimalTest$FindOlderAnimalTests" time="0.002"/>
+  <testcase name="РџРµСЂРµРґР°С‡Р° СЃРїРёСЃРєР° СЃРѕ Р·РЅР°С‡РµРЅРёСЏРјРё #2" classname="FindAnimalTest$FindOlderAnimalTests" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

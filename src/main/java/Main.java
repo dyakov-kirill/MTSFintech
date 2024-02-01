@@ -31,7 +31,5 @@ public class Main {
         for (Animal animal : olderThan10) {
             System.out.printf("%s was born in %d\n", animal.getName(), animal.getBirthDate().getYear());
         }
-        Cat cat1 = new Cat("Барсик", "Сиамский", BigDecimal.valueOf(1000), "Добрый", LocalDate.of(2011, 11, 11));
-        Cat cat2 = new Cat("Барсик", "Сиамский", BigDecimal.valueOf(1000), "Добрый", LocalDate.of(2011, 11, 11));
     }
 }

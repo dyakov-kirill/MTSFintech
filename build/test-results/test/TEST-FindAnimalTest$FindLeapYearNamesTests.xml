@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="FindAnimalTest$FindLeapYearNamesTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-01-31T16:48:10" hostname="DESKTOP-Q2L74RK" time="0.006">
-  <properties/>
-  <testcase name="РџРµСЂРµРґР°С‡Р° null РІ РїР°СЂР°РјРµС‚СЂ" classname="FindAnimalTest$FindLeapYearNamesTests" time="0.001"/>
-  <testcase name="РџРµСЂРµРґР°С‡Р° РїСѓСЃС‚РѕРіРѕ СЃРїРёСЃРєР°" classname="FindAnimalTest$FindLeapYearNamesTests" time="0.001"/>
-  <testcase name="РџРµСЂРµРґР°С‡Р° СЃРїРёСЃРєР° СЃ РґР°РЅРЅС‹РјРё" classname="FindAnimalTest$FindLeapYearNamesTests" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

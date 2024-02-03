@@ -18,6 +18,7 @@ class FindAnimalTest {
     public static ArrayList<String> leapYearNameList;
     public static ArrayList<Animal> older3Animal;
     public static ArrayList<Animal> older14Animal;
+    
     @BeforeAll
     public static void beforeAll() {
         searchService = new SearchServiceImpl();

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public interface CreateAnimalService {
+
     default ArrayList<Animal> createAnimals(AnimalType animalType) {
         int i = 0;
         Random rand = new Random();

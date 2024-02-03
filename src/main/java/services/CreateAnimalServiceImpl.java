@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
+
+    private AnimalType animalType;
+
     /**
      * Функция, возвращающая 10 животных типа animalType
      *
@@ -18,10 +21,14 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     public ArrayList<Animal> createAnimals(AnimalType animalType) {
         Random rand = new Random();
         ArrayList<Animal> res = new ArrayList<>();
+        AnimalType actualType = animalType;
+        if (this.animalType != null) {
+            actualType = this.animalType;
+        }
         int i = 0;
         do {
             AbstractAnimal animal;
-            switch (animalType) {
+            switch (actualType) {
                 case DOG -> {
                     LocalDate birthDate = LocalDate.ofEpochDay(rand.nextLong(0, LocalDate.now().toEpochDay()));
                     animal = new Dog("Дружок " + i, "Немецкая овчарка", BigDecimal.valueOf(30000), "Верный", birthDate);
@@ -50,11 +57,10 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     /**
      * Функция, возвращающая N животных типа animalType
      *
-     * @param animalType тип возвращаемых животных
      * @param N          количество возвращаемых животных
      * @return массив из N животных типа animalType
      */
-    public ArrayList<Animal> createAnimals(AnimalType animalType, int N) {
+    public ArrayList<Animal> createAnimals(int N) {
         Random rand = new Random();
         ArrayList<Animal> res = new ArrayList<>();
         for (int i = 0; i < N; i++) {
@@ -85,4 +91,11 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         return res;
     }
 
+    public AnimalType getAnimalType() {
+        return animalType;
+    }
+
+    public void setAnimalType(AnimalType animalType) {
+        this.animalType = animalType;
+    }
 }

@@ -1,14 +1,32 @@
-package services;
+package repositories;
 
 import animals.Animal;
+import animals.AnimalType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import services.CreateAnimalService;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
-@Deprecated
-public class SearchServiceImpl implements SearchService {
+@Repository
+public class AnimalRepositoryImpl implements AnimalRepository {
+
+    private ArrayList<Animal> animals;
+
+    @Autowired
+    private CreateAnimalService animalService;
+
+    @PostConstruct
+    private void postConstruct() {
+        animals = animalService.createAnimals(AnimalType.CAT);
+    }
+
     @Override
-    public ArrayList<String> findLeapYearNames(ArrayList<Animal> animals) {
+    public ArrayList<String> findLeapYearNames() {
         ArrayList<String> res = new ArrayList<>();
         if (animals == null) {
             return res;
@@ -22,7 +40,7 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public ArrayList<Animal> findOlderAnimal(ArrayList<Animal> animals, int N) {
+    public ArrayList<Animal> findOlderAnimal(int N) {
         ArrayList<Animal> res = new ArrayList<>();
         if (animals == null) {
             return res;
@@ -36,9 +54,9 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public ArrayList<Animal> findDuplicate(ArrayList<Animal> animals) {
+    public Set<Animal> findDuplicate() {
         ArrayList<Animal> appearedAnimals = new ArrayList<>();
-        ArrayList<Animal> duplicate = new ArrayList<>();
+        HashSet<Animal> duplicate = new HashSet<>();
         if (animals == null) {
             return duplicate;
         }
@@ -53,12 +71,14 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public void printDuplicate(ArrayList<Animal> animals) {
-        ArrayList<Animal> duplicates = findDuplicate(animals);
+    public void printDuplicate() {
+        Set<Animal> duplicates = findDuplicate();
         for (Animal animal: duplicates) {
             System.out.printf("Duplicate founded: %s\n", animal.getName());
         }
     }
 
-
+    public void setAnimals(ArrayList<Animal> animals) {
+        this.animals = animals;
+    }
 }

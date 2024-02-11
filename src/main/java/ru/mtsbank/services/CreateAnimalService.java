@@ -1,6 +1,6 @@
-package services;
+package ru.mtsbank.services;
 
-import animals.*;
+import ru.mtsbank.animals.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

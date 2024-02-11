@@ -1,8 +1,8 @@
-package services;
+package ru.mtsbank.services;
 
-import animals.AnimalType;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import ru.mtsbank.animals.AnimalType;
 
 import java.util.Random;
 

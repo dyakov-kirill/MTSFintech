@@ -1,25 +1,25 @@
-package animals;
+package ru.mtsbank.animals;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Random;
 
-public class Dog extends Pet{
-    public Dog(String name, String breed, BigDecimal cost, String character, LocalDate birthDate) {
+public class Shark extends Predator {
+    public Shark(String name, String breed, BigDecimal cost, String character,  LocalDate birthDate) {
         this.name = name;
         this.breed = breed;
         this.cost = cost;
         this.character = character;
         this.birthDate = birthDate;
     }
-    public Dog() {
-        name = "Дружок";
-        breed = "Немецкая овчарка";
-        cost = new BigDecimal(30000);
-        character = "Верный";
+    public Shark() {
+        name = "Челюсть";
+        breed = "Белая акула";
+        cost = new BigDecimal(100000);
+        character = "Злая";
         birthDate = LocalDate.now();
     }
+
     @Override
     public String getBreed() {
         return breed;
@@ -47,14 +47,14 @@ public class Dog extends Pet{
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || obj.getClass() != Dog.class) {
+        if (obj == null || obj.getClass() != Shark.class) {
             return false;
         }
-        Dog otherDog = (Dog) obj;
-        return Objects.equals(breed, otherDog.getBreed())
-                && Objects.equals(name, otherDog.getName())
-                && Objects.equals(cost, otherDog.getCost())
-                && Objects.equals(character, otherDog.getChar())
-                && Objects.equals(birthDate, otherDog.getBirthDate());
+        Shark otherShark = (Shark) obj;
+        return Objects.equals(breed, otherShark.getBreed())
+                && Objects.equals(name, otherShark.getName())
+                && Objects.equals(cost, otherShark.getCost())
+                && Objects.equals(character, otherShark.getChar())
+                && Objects.equals(birthDate, otherShark.getBirthDate());
     }
 }

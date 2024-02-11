@@ -1,11 +1,11 @@
-package animals;
+package ru.mtsbank.animals;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Wolf extends Predator {
-    public Wolf(String name, String breed, BigDecimal cost, String character, LocalDate birthDate) {
+public class Cat extends Pet {
+    public Cat(String name, String breed, BigDecimal cost, String character, LocalDate birthDate) {
         this.name = name;
         this.breed = breed;
         this.cost = cost;
@@ -13,11 +13,11 @@ public class Wolf extends Predator {
         this.birthDate = birthDate;
     }
 
-    public Wolf() {
-        name = "Клык";
-        breed = "Обыкновенный";
-        cost = new BigDecimal(50000);
-        character = "Агрессивный";
+    public Cat() {
+        name = "Барсик";
+        breed = "Британская";
+        cost = new BigDecimal(10000);
+        character = "Ласковый";
         birthDate = LocalDate.now();
     }
 
@@ -48,14 +48,14 @@ public class Wolf extends Predator {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || obj.getClass() != Wolf.class) {
+        if (obj == null || obj.getClass() != Cat.class) {
             return false;
         }
-        Wolf otherWolf = (Wolf) obj;
-        return Objects.equals(breed, otherWolf.getBreed())
-                && Objects.equals(name, otherWolf.getName())
-                && Objects.equals(cost, otherWolf.getCost())
-                && Objects.equals(character, otherWolf.getChar())
-                && Objects.equals(birthDate, otherWolf.getBirthDate());
+        Cat otherCat = (Cat) obj;
+        return Objects.equals(breed, otherCat.getBreed())
+                && Objects.equals(name, otherCat.getName())
+                && Objects.equals(cost, otherCat.getCost())
+                && Objects.equals(character, otherCat.getChar())
+                && Objects.equals(birthDate, otherCat.getBirthDate());
     }
 }

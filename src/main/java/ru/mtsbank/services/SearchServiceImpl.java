@@ -1,6 +1,6 @@
-package services;
+package ru.mtsbank.services;
 
-import animals.Animal;
+import ru.mtsbank.animals.Animal;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

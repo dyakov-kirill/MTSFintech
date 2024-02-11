@@ -1,8 +1,7 @@
-package animals;
+package ru.mtsbank.animals;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Objects;
 
 public abstract class AbstractAnimal implements Animal {
     protected String breed;

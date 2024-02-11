@@ -1,12 +1,12 @@
-package repositories;
+package ru.mtsbank.repositories;
 
-import animals.Animal;
-import animals.AnimalType;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import services.CreateAnimalService;
+import ru.mtsbank.animals.Animal;
+import ru.mtsbank.animals.AnimalType;
+import ru.mtsbank.services.CreateAnimalService;
 
-import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;

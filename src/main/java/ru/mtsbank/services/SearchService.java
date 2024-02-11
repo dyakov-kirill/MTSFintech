@@ -1,37 +1,44 @@
-package repositories;
+package ru.mtsbank.services;
 
-import animals.Animal;
-import org.springframework.stereotype.Repository;
+
+import ru.mtsbank.animals.Animal;
 
 import java.util.ArrayList;
-import java.util.Set;
 
-@Repository
-public interface AnimalRepository {
+/**
+ * Методы перенесены в интерфейс AnimalRepository
+ */
+@Deprecated
+public interface SearchService {
     /**
      * Функция, возвращающая массив имен животных, родившихся в виоскосный год
      *
+     * @param animals масив животных
      * @return массив животных, родившихся в високосный год
      */
-    ArrayList<String> findLeapYearNames();
+    ArrayList<String> findLeapYearNames(ArrayList<Animal> animals);
 
     /**
      * Функция, возвращающая массив животных, чей возраст больше N
      *
-     * @param N возраст
+     * @param animals масив животных
+     * @param N       возраст
      * @return массив животных, возраст которых больше N
      */
-    ArrayList<Animal> findOlderAnimal(int N);
+    ArrayList<Animal> findOlderAnimal(ArrayList<Animal> animals, int N);
 
     /**
      * Функция, возвращающая массив повторяющихся в массиве животных
      *
+     * @param animals масив животных
      * @return список дубликатов
      */
-    Set<Animal> findDuplicate();
+    ArrayList<Animal> findDuplicate(ArrayList<Animal> animals);
 
     /**
      * Функция, выводящая имена повторяющихся в массиве животных
+     *
+     * @param animals масив животных
      */
-    void printDuplicate();
+    void printDuplicate(ArrayList<Animal> animals);
 }

@@ -1,7 +1,6 @@
 package ru.mtsbank.repositories;
 
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.mtsbank.animals.Animal;
 import ru.mtsbank.animals.AnimalType;
@@ -17,8 +16,11 @@ public class AnimalRepositoryImpl implements AnimalRepository {
 
     private ArrayList<Animal> animals;
 
-    @Autowired
-    private CreateAnimalService animalService;
+    private final CreateAnimalService animalService;
+
+    public AnimalRepositoryImpl(CreateAnimalService animalService) {
+        this.animalService = animalService;
+    }
 
     @PostConstruct
     private void postConstruct() {

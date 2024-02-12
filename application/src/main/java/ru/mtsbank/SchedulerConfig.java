@@ -1,16 +1,11 @@
 package ru.mtsbank;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import ru.mtsbank.animals.Animal;
 import ru.mtsbank.repositories.AnimalRepository;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Component
 public class SchedulerConfig {
@@ -23,7 +18,6 @@ public class SchedulerConfig {
 
     @Scheduled(fixedDelay = 60000)
     public void printResults() {
-        System.out.println((new SimpleDateFormat("HH:mm:ss")).format(new Date()));
         ArrayList<Animal> olderAnimal = repository.findOlderAnimal(10);
         System.out.println("Older than 10:");
         for (Animal animal : olderAnimal) {

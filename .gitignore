@@ -6,7 +6,6 @@ README.md
 /build/
 gradlew
 gradlew.bat
-settings.gradle
 /gradle/
 /application/build/
 /application/gradle/

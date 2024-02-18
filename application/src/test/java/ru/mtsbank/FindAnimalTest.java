@@ -1,10 +1,10 @@
-import animals.Animal;
-import animals.Cat;
+import ru.mtsbank.animals.Animal;
+import ru.mtsbank.animals.Cat;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import services.SearchService;
-import services.SearchServiceImpl;
+import ru.mtsbank.services.SearchService;
+import ru.mtsbank.services.SearchServiceImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

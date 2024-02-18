@@ -1,7 +1,7 @@
-import animals.Cat;
-import animals.Dog;
-import animals.Shark;
-import animals.Wolf;
+import ru.mtsbank.animals.Cat;
+import ru.mtsbank.animals.Dog;
+import ru.mtsbank.animals.Shark;
+import ru.mtsbank.animals.Wolf;
 import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;

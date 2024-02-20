@@ -1,3 +1,5 @@
+package ru.mtsbank;
+
 import ru.mtsbank.animals.Animal;
 import ru.mtsbank.animals.Cat;
 import org.junit.jupiter.api.*;

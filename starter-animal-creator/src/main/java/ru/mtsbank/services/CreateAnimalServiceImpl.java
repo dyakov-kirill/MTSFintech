@@ -75,9 +75,13 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
      * @param N          количество возвращаемых животных
      * @return массив из N животных типа animalType
      */
-    public ArrayList<Animal> createAnimals(int N) {
+    public ArrayList<Animal> createAnimals(Integer N) {
+        if (N == null || N <= 0) {
+            return new ArrayList<>();
+        }
         Random rand = new Random();
         ArrayList<Animal> res = new ArrayList<>();
+        System.out.println(catNames);
         for (int i = 0; i < N; i++) {
             AbstractAnimal animal;
             switch (animalType) {

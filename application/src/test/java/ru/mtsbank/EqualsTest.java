@@ -1,3 +1,5 @@
+package ru.mtsbank;
+
 import ru.mtsbank.animals.Cat;
 import ru.mtsbank.animals.Dog;
 import ru.mtsbank.animals.Shark;

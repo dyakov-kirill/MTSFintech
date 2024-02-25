@@ -11,6 +11,7 @@ public class Wolf extends Predator {
         this.cost = cost;
         this.character = character;
         this.birthDate = birthDate;
+        this.animalType = AnimalType.WOLF;
     }
 
     public Wolf() {
@@ -47,6 +48,11 @@ public class Wolf extends Predator {
     }
 
     @Override
+    public AnimalType getAnimalType() {
+        return animalType;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != Wolf.class) {
             return false;
@@ -58,4 +64,5 @@ public class Wolf extends Predator {
                 && Objects.equals(character, otherWolf.getChar())
                 && Objects.equals(birthDate, otherWolf.getBirthDate());
     }
+
 }

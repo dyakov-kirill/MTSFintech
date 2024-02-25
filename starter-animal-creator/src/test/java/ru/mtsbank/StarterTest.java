@@ -5,7 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
+import ru.mtsbank.animals.Animal;
 import ru.mtsbank.services.CreateAnimalServiceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @SpringBootTest(classes = StarterTestConfiguration.class)
 @ActiveProfiles("test")
@@ -36,13 +41,25 @@ public class StarterTest {
         @Test
         @DisplayName("Создание 10 животных")
         public void create10Animals() {
-            Assertions.assertEquals(10, createAnimalService.createAnimals(10).size());
+            Map<String, List<Animal>> animals = createAnimalService.createAnimals(10);
+            Integer sum = 0;
+            sum += animals.getOrDefault("DOG", new ArrayList<>()).size();
+            sum += animals.getOrDefault("CAT", new ArrayList<>()).size();
+            sum += animals.getOrDefault("WOLF", new ArrayList<>()).size();
+            sum += animals.getOrDefault("SHARK", new ArrayList<>()).size();
+            Assertions.assertEquals(10, sum);
         }
 
         @Test
         @DisplayName("Создание 100 животных")
         public void create1000Animals() {
-            Assertions.assertEquals(100, createAnimalService.createAnimals(100).size());
+            Map<String, List<Animal>> animals = createAnimalService.createAnimals(10);
+            Integer sum = 0;
+            sum += animals.getOrDefault("DOG", new ArrayList<>()).size();
+            sum += animals.getOrDefault("CAT", new ArrayList<>()).size();
+            sum += animals.getOrDefault("WOLF", new ArrayList<>()).size();
+            sum += animals.getOrDefault("SHARK", new ArrayList<>()).size();
+            Assertions.assertEquals(100, sum);
         }
     }
 

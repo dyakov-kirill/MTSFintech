@@ -7,14 +7,12 @@ import ru.mtsbank.animals.AnimalType;
 import ru.mtsbank.services.CreateAnimalService;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Repository
 public class AnimalRepositoryImpl implements AnimalRepository {
 
-    private ArrayList<Animal> animals;
+    private Map<String, List<Animal>> animals;
 
     private final CreateAnimalService animalService;
 
@@ -28,59 +26,90 @@ public class AnimalRepositoryImpl implements AnimalRepository {
     }
 
     @Override
-    public ArrayList<String> findLeapYearNames() {
-        ArrayList<String> res = new ArrayList<>();
+    public Map<String, LocalDate> findLeapYearNames() {
+        Map<String, LocalDate> res = new HashMap<>();
         if (animals == null) {
             return res;
         }
-        for (Animal animal: animals) {
-            if (animal != null && animal.getBirthDate().isLeapYear()) {
-                res.add(animal.getName());
+        for (List<Animal> animalsList: animals.values()) {
+            for (Animal animal : animalsList) {
+                if (animal.getBirthDate().isLeapYear()) {
+                    res.put(animal.getAnimalType().toString() + " " + animal.getName(), animal.getBirthDate());
+                }
             }
+
         }
         return res;
     }
 
     @Override
-    public ArrayList<Animal> findOlderAnimal(int N) {
-        ArrayList<Animal> res = new ArrayList<>();
+    public Map<Animal, Integer> findOlderAnimal(int N) {
+        Map<Animal, Integer> res = new HashMap<>();
         if (animals == null) {
             return res;
         }
-        for (Animal animal: animals) {
-            if (animal != null && LocalDate.now().getYear() - animal.getBirthDate().getYear() > N) {
-                res.add(animal);
+        Animal oldestAnimal = null;
+        int thisYear = LocalDate.now().getYear();
+        for (List<Animal> animalsList: animals.values()) {
+            for (Animal animal : animalsList) {
+                int age = getAnimalAge(animal);
+                if (age > N) {
+                    res.put(animal, age);
+                }
+                if (oldestAnimal == null || age > getAnimalAge(oldestAnimal)) {
+                    oldestAnimal = animal;
+                }
             }
+        }
+        if (res.isEmpty() && oldestAnimal != null) {
+            res.put(oldestAnimal, getAnimalAge(oldestAnimal));
         }
         return res;
     }
 
     @Override
-    public Set<Animal> findDuplicate() {
+    public Map<String, Integer> findDuplicate() {
         ArrayList<Animal> appearedAnimals = new ArrayList<>();
-        HashSet<Animal> duplicate = new HashSet<>();
+        Map<String, Integer> duplicates = new HashMap<>();
         if (animals == null) {
-            return duplicate;
+            return duplicates;
         }
-        for (Animal animal: animals) {
-            if (!appearedAnimals.contains(animal)) {
-                appearedAnimals.add(animal);
-            } else {
-                duplicate.add(animal);
+        for (List<Animal> animals: animals.values()) {
+            for (Animal animal : animals) {
+                if (!appearedAnimals.contains(animal)) {
+                    appearedAnimals.add(animal);
+                } else {
+                    String key = animal.getAnimalType().toString();
+                    duplicates.put(key, duplicates.getOrDefault(key, 0) + 1);
+                }
             }
         }
-        return duplicate;
+        return duplicates;
     }
 
     @Override
     public void printDuplicate() {
-        Set<Animal> duplicates = findDuplicate();
-        for (Animal animal: duplicates) {
-            System.out.printf("Duplicate founded: %s\n", animal.getName());
+        Map<String, Integer> duplicates = findDuplicate();
+        if (duplicates.keySet().isEmpty()) {
+            System.out.println("Duplicates not found");
+        } else {
+            System.out.print("Duplicates founded:");
+            for (String key: duplicates.keySet()) {
+                System.out.println(key + " = " + duplicates.get(key));
+            }
         }
     }
 
-    public void setAnimals(ArrayList<Animal> animals) {
+    public void setAnimals(Map<String, List<Animal>> animals) {
         this.animals = animals;
+    }
+
+    private int getAnimalAge(Animal animal) {
+        int thisYear = LocalDate.now().getYear();
+        int age = thisYear - animal.getBirthDate().getYear();
+        if (LocalDate.now().getDayOfYear() < animal.getBirthDate().getDayOfYear()) {
+            age--;
+        }
+        return age;
     }
 }

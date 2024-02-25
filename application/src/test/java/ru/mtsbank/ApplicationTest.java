@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import ru.mtsbank.animals.Animal;
+import ru.mtsbank.animals.AnimalType;
 import ru.mtsbank.animals.Cat;
 import ru.mtsbank.repositories.AnimalRepository;
 import ru.mtsbank.repositories.AnimalRepositoryImpl;
@@ -15,6 +16,9 @@ import ru.mtsbank.repositories.AnimalRepositoryImpl;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SpringBootTest(classes = ApplicationConfiguration.class)
 public class ApplicationTest {
@@ -44,31 +48,37 @@ public class ApplicationTest {
         @Test
         @DisplayName("Поиск дубликатов")
         public void findDuplicate() {
-            ArrayList<Animal> animals = new ArrayList<>();
-            animals.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
-            animals.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
+            List<Animal> list = new ArrayList<>();
+            Map<String, List<Animal>> animals = new HashMap<>();
+            list.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
+            list.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
+            animals.put(AnimalType.CAT.toString(), list);
             animalRepository.setAnimals(animals);
-            Assertions.assertEquals(animalRepository.findDuplicate().size(), 1);
+            Assertions.assertEquals(1, animalRepository.findDuplicate().get(AnimalType.CAT.toString()));
         }
 
         @Test
         @DisplayName("Поиск високосных лет")
         public void findLeapYears() {
-            ArrayList<Animal> animals = new ArrayList<>();
-            animals.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2024, 1, 1)));
-            animals.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
+            List<Animal> list = new ArrayList<>();
+            Map<String, List<Animal>> animals = new HashMap<>();
+            list.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2024, 1, 1)));
+            list.add(new Cat("2", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
+            animals.put(AnimalType.CAT.toString(), list);
             animalRepository.setAnimals(animals);
-            Assertions.assertEquals(animalRepository.findLeapYearNames().size(), 1);
+            Assertions.assertEquals(list.get(0).getBirthDate(), animalRepository.findLeapYearNames().get("Cat 1"));
         }
 
         @Test
         @DisplayName("Поиск животных страше 10")
         public void findOlderThan10() {
-            ArrayList<Animal> animals = new ArrayList<>();
-            animals.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1999, 1, 1)));
-            animals.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2024, 1, 1)));
+            List<Animal> list = new ArrayList<>();
+            Map<String, List<Animal>> animals = new HashMap<>();
+            list.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1999, 1, 1)));
+            list.add(new Cat("2", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2024, 1, 1)));
+            animals.put(AnimalType.CAT.toString(), list);
             animalRepository.setAnimals(animals);
-            Assertions.assertEquals(animalRepository.findOlderAnimal(10).size(), 1);
+            Assertions.assertEquals(25, animalRepository.findOlderAnimal(10).get(list.get(0)));
         }
     }
 
@@ -94,5 +104,17 @@ public class ApplicationTest {
             animalRepository.setAnimals(null);
             Assertions.assertEquals(animalRepository.findOlderAnimal(10).size(), 0);
         }
+        @Test
+        @DisplayName("Отсутствие животных старше 10")
+        public void noOlderThan10() {
+            List<Animal> list = new ArrayList<>();
+            Map<String, List<Animal>> animals = new HashMap<>();
+            list.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1999, 1, 1)));
+            list.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2024, 1, 1)));
+            animals.put(AnimalType.CAT.toString(), list);
+            animalRepository.setAnimals(animals);
+            Assertions.assertEquals(animalRepository.findOlderAnimal(50).get(list.get(0)), 25);
+        }
+
     }
 }

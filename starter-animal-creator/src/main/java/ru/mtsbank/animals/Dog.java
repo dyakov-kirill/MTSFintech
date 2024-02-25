@@ -11,6 +11,7 @@ public class Dog extends Pet{
         this.cost = cost;
         this.character = character;
         this.birthDate = birthDate;
+        this.animalType = AnimalType.DOG;
     }
     public Dog() {
         name = "Дружок";
@@ -42,6 +43,11 @@ public class Dog extends Pet{
     @Override
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    @Override
+    public AnimalType getAnimalType() {
+        return animalType;
     }
 
     @Override

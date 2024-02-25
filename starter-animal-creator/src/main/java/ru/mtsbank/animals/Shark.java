@@ -11,6 +11,7 @@ public class Shark extends Predator {
         this.cost = cost;
         this.character = character;
         this.birthDate = birthDate;
+        this.animalType = AnimalType.SHARK;
     }
     public Shark() {
         name = "Челюсть";
@@ -43,6 +44,11 @@ public class Shark extends Predator {
     @Override
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    @Override
+    public AnimalType getAnimalType() {
+        return animalType;
     }
 
     @Override

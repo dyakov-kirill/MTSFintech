@@ -5,9 +5,7 @@ import ru.mtsbank.animals.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
 
@@ -33,9 +31,9 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
      * @return массив из 10 животных типа animalType
      */
     @Override
-    public ArrayList<Animal> createAnimals(AnimalType animalType) {
+    public Map<String, List<Animal>> createAnimals(AnimalType animalType) {
         Random rand = new Random();
-        ArrayList<Animal> res = new ArrayList<>();
+        HashMap<String, List<Animal>> res = new HashMap<>();
         AnimalType actualType = animalType;
         if (this.animalType != null) {
             actualType = this.animalType;
@@ -47,22 +45,22 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
                 case DOG -> {
                     LocalDate birthDate = LocalDate.ofEpochDay(rand.nextLong(0, LocalDate.now().toEpochDay()));
                     animal = new Dog(dogNames.get(rand.nextInt(dogNames.size())), "Shepherd", BigDecimal.valueOf(30000), "Faithful", birthDate);
-                    res.add(animal);
+                    res.getOrDefault("DOG", new ArrayList<>()).add(animal);
                 }
                 case CAT -> {
                     LocalDate birthDate = LocalDate.ofEpochDay(rand.nextLong(0, LocalDate.now().toEpochDay()));
                     animal = new Cat(catNames.get(rand.nextInt(catNames.size())), "British", BigDecimal.valueOf(10000), "Gentle", birthDate);
-                    res.add(animal);
+                    res.getOrDefault("CAT", new ArrayList<>()).add(animal);
                 }
                 case WOLF -> {
                     LocalDate birthDate = LocalDate.ofEpochDay(rand.nextLong(0, LocalDate.now().toEpochDay()));
                     animal = new Wolf(wolfNames.get(rand.nextInt(wolfNames.size())), "Default", BigDecimal.valueOf(50000), "Aggressive", birthDate);
-                    res.add(animal);
+                    res.getOrDefault("WOLF", new ArrayList<>()).add(animal);
                 }
                 case SHARK -> {
                     LocalDate birthDate = LocalDate.ofEpochDay(rand.nextLong(0, LocalDate.now().toEpochDay()));
                     animal = new Shark(sharkNames.get(rand.nextInt(sharkNames.size())), "White shark", BigDecimal.valueOf(100000), "Angry", birthDate);
-                    res.add(animal);
+                    res.getOrDefault("SHARK", new ArrayList<>()).add(animal);
                 }
             }
         } while (i++ < 9);
@@ -75,12 +73,12 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
      * @param N          количество возвращаемых животных
      * @return массив из N животных типа animalType
      */
-    public ArrayList<Animal> createAnimals(Integer N) {
+    public Map<String, List<Animal>> createAnimals(Integer N) {
         if (N == null || N <= 0) {
-            return new ArrayList<>();
+            return new HashMap<String, List<Animal>>();
         }
         Random rand = new Random();
-        ArrayList<Animal> res = new ArrayList<>();
+        HashMap<String, List<Animal>> res = new HashMap<>();
         System.out.println(catNames);
         for (int i = 0; i < N; i++) {
             AbstractAnimal animal;
@@ -88,22 +86,22 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
                 case DOG -> {
                     LocalDate birthDate = LocalDate.ofEpochDay(rand.nextLong(0, LocalDate.now().toEpochDay()));
                     animal = new Dog(dogNames.get(rand.nextInt(dogNames.size())), "Shepherd", BigDecimal.valueOf(30000), "Faithful", birthDate);
-                    res.add(animal);
+                    res.getOrDefault("DOG", new ArrayList<>()).add(animal);
                 }
                 case CAT -> {
                     LocalDate birthDate = LocalDate.ofEpochDay(rand.nextLong(0, LocalDate.now().toEpochDay()));
                     animal = new Cat(catNames.get(rand.nextInt(catNames.size())), "British", BigDecimal.valueOf(10000), "Gentle", birthDate);
-                    res.add(animal);
+                    res.getOrDefault("CAT", new ArrayList<>()).add(animal);
                 }
                 case WOLF -> {
                     LocalDate birthDate = LocalDate.ofEpochDay(rand.nextLong(0, LocalDate.now().toEpochDay()));
                     animal = new Wolf(wolfNames.get(rand.nextInt(wolfNames.size())), "Default", BigDecimal.valueOf(50000), "Aggressive", birthDate);
-                    res.add(animal);
+                    res.getOrDefault("WOLF", new ArrayList<>()).add(animal);
                 }
                 case SHARK -> {
                     LocalDate birthDate = LocalDate.ofEpochDay(rand.nextLong(0, LocalDate.now().toEpochDay()));
                     animal = new Shark(sharkNames.get(rand.nextInt(sharkNames.size())), "White shark", BigDecimal.valueOf(100000), "Angry", birthDate);
-                    res.add(animal);
+                    res.getOrDefault("SHARK", new ArrayList<>()).add(animal);
                 }
             }
         }

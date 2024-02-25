@@ -3,7 +3,9 @@ package ru.mtsbank.repositories;
 import org.springframework.stereotype.Repository;
 import ru.mtsbank.animals.Animal;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Set;
 
 @Repository
@@ -13,7 +15,7 @@ public interface AnimalRepository {
      *
      * @return массив животных, родившихся в високосный год
      */
-    ArrayList<String> findLeapYearNames();
+    Map<String, LocalDate> findLeapYearNames();
 
     /**
      * Функция, возвращающая массив животных, чей возраст больше N
@@ -21,14 +23,14 @@ public interface AnimalRepository {
      * @param N возраст
      * @return массив животных, возраст которых больше N
      */
-    ArrayList<Animal> findOlderAnimal(int N);
+    Map<Animal, Integer> findOlderAnimal(int N);
 
     /**
      * Функция, возвращающая массив повторяющихся в массиве животных
      *
      * @return список дубликатов
      */
-    Set<Animal> findDuplicate();
+    Map<String, Integer> findDuplicate();
 
     /**
      * Функция, выводящая имена повторяющихся в массиве животных

@@ -5,7 +5,9 @@ import org.springframework.stereotype.Component;
 import ru.mtsbank.animals.Animal;
 import ru.mtsbank.repositories.AnimalRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Map;
 
 @Component
 public class SchedulerConfig {
@@ -18,15 +20,15 @@ public class SchedulerConfig {
 
     @Scheduled(fixedDelay = 60000)
     public void printResults() {
-        ArrayList<Animal> olderAnimal = repository.findOlderAnimal(10);
+        Map<Animal, Integer> olderAnimal = repository.findOlderAnimal(10);
         System.out.println("Older than 10:");
-        for (Animal animal : olderAnimal) {
+        for (Animal animal : olderAnimal.keySet()) {
             System.out.println(animal.getName() + ", year of birth - " + animal.getBirthDate().getYear());
         }
-        ArrayList<String> leapYearNames = repository.findLeapYearNames();
+        Map<String, LocalDate> leapYearNames = repository.findLeapYearNames();
         System.out.println("Animals, which was born in leap year:");
-        for (String animalName : leapYearNames) {
-            System.out.println(animalName);
+        for (String key : leapYearNames.keySet()) {
+            System.out.println(key + " = " + leapYearNames.get(key));
         }
         repository.printDuplicate();
     }

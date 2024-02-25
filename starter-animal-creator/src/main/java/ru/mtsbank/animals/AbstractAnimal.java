@@ -9,4 +9,5 @@ public abstract class AbstractAnimal implements Animal {
     protected BigDecimal cost;
     protected String character;
     protected LocalDate birthDate;
+    protected AnimalType animalType;
 }

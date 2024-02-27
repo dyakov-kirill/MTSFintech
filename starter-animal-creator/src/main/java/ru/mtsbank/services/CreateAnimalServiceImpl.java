@@ -33,7 +33,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     @Override
     public Map<String, List<Animal>> createAnimals(AnimalType animalType) {
         Random rand = new Random();
-        HashMap<String, List<Animal>> res = new HashMap<>();
+        Map<String, List<Animal>> res = new HashMap<>();
         AnimalType actualType = animalType;
         if (this.animalType != null) {
             actualType = this.animalType;
@@ -78,7 +78,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
             return new HashMap<String, List<Animal>>();
         }
         Random rand = new Random();
-        HashMap<String, List<Animal>> res = new HashMap<>();
+        Map<String, List<Animal>> res = new HashMap<>();
         System.out.println(catNames);
         for (int i = 0; i < N; i++) {
             AbstractAnimal animal;

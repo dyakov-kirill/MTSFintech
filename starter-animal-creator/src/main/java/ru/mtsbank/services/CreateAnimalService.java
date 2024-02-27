@@ -11,7 +11,7 @@ public interface CreateAnimalService {
     default Map<String, List<Animal>> createAnimals(AnimalType animalType) {
         int i = 0;
         Random rand = new Random();
-        HashMap<String, List<Animal>> res = new HashMap<>();
+        Map<String, List<Animal>> res = new HashMap<>();
         while (i++ < 10) {
             AbstractAnimal animal;
             switch (animalType) {

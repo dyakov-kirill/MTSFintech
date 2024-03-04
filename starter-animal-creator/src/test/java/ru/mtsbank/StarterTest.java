@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
-import ru.mtsbank.animals.Animal;
+import ru.mtsbank.entity.Animal;
 import ru.mtsbank.services.CreateAnimalServiceImpl;
 
 import java.util.ArrayList;

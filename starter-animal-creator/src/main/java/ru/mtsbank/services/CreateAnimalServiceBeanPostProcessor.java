@@ -2,7 +2,7 @@ package ru.mtsbank.services;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import ru.mtsbank.animals.AnimalType;
+import ru.mtsbank.entity.AnimalType;
 
 import java.util.Random;
 

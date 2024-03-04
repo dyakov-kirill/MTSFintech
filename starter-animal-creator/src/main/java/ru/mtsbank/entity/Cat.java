@@ -1,4 +1,4 @@
-package ru.mtsbank.animals;
+package ru.mtsbank.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -63,5 +63,10 @@ public class Cat extends Pet {
                 && Objects.equals(cost, otherCat.getCost())
                 && Objects.equals(character, otherCat.getChar())
                 && Objects.equals(birthDate, otherCat.getBirthDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, breed, cost, character, birthDate, animalType);
     }
 }

@@ -1,7 +1,7 @@
 package ru.mtsbank;
 
-import ru.mtsbank.animals.Animal;
-import ru.mtsbank.animals.Cat;
+import ru.mtsbank.entity.Animal;
+import ru.mtsbank.entity.Cat;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

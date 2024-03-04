@@ -1,9 +1,9 @@
 package ru.mtsbank;
 
-import ru.mtsbank.animals.Cat;
-import ru.mtsbank.animals.Dog;
-import ru.mtsbank.animals.Shark;
-import ru.mtsbank.animals.Wolf;
+import ru.mtsbank.entity.Cat;
+import ru.mtsbank.entity.Dog;
+import ru.mtsbank.entity.Shark;
+import ru.mtsbank.entity.Wolf;
 import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;

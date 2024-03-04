@@ -1,4 +1,4 @@
-package ru.mtsbank.animals;
+package ru.mtsbank.entity;
 
 public enum AnimalType {
     CAT("Cat"),

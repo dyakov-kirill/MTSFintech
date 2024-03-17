@@ -2,11 +2,10 @@ package ru.mtsbank;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import ru.mtsbank.animals.Animal;
+import ru.mtsbank.entity.Animal;
 import ru.mtsbank.repositories.AnimalRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Map;
 
 @Component

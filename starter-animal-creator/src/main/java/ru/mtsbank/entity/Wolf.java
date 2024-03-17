@@ -1,4 +1,4 @@
-package ru.mtsbank.animals;
+package ru.mtsbank.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -65,4 +65,8 @@ public class Wolf extends Predator {
                 && Objects.equals(birthDate, otherWolf.getBirthDate());
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, breed, cost, character, birthDate, animalType);
+    }
 }

@@ -1,4 +1,4 @@
-package ru.mtsbank.animals;
+package ru.mtsbank.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

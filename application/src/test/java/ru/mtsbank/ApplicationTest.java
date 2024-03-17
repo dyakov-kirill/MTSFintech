@@ -7,18 +7,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import ru.mtsbank.animals.Animal;
-import ru.mtsbank.animals.AnimalType;
-import ru.mtsbank.animals.Cat;
-import ru.mtsbank.repositories.AnimalRepository;
+import ru.mtsbank.entity.Animal;
+import ru.mtsbank.entity.AnimalType;
+import ru.mtsbank.entity.Cat;
+import ru.mtsbank.entity.Dog;
 import ru.mtsbank.repositories.AnimalRepositoryImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootTest(classes = ApplicationConfiguration.class)
 public class ApplicationTest {
@@ -48,13 +45,21 @@ public class ApplicationTest {
         @Test
         @DisplayName("Поиск дубликатов")
         public void findDuplicate() {
-            List<Animal> list = new ArrayList<>();
+            List<Animal> list1 = new ArrayList<>();
+            List<Animal> list2 = new ArrayList<>();
             Map<String, List<Animal>> animals = new HashMap<>();
-            list.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
-            list.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
-            animals.put(AnimalType.CAT.toString(), list);
+            list1.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
+            list1.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
+            list1.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
+            list2.add(new Dog("3", "2", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
+            list2.add(new Dog("3", "2", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
+            list2.add(new Dog("4", "2", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
+            list2.add(new Dog("4", "2", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
+            animals.put(AnimalType.CAT.toString(), list1);
+            animals.put(AnimalType.DOG.toString(), list2);
             animalRepository.setAnimals(animals);
-            Assertions.assertEquals(1, animalRepository.findDuplicate().get(AnimalType.CAT.toString()));
+            Assertions.assertIterableEquals(List.of(list1.get(0)), animalRepository.findDuplicate().get(AnimalType.CAT.toString()));
+            Assertions.assertIterableEquals(List.of(list2.get(0), list2.get(2)), animalRepository.findDuplicate().get(AnimalType.DOG.toString()));
         }
 
         @Test
@@ -79,6 +84,26 @@ public class ApplicationTest {
             animals.put(AnimalType.CAT.toString(), list);
             animalRepository.setAnimals(animals);
             Assertions.assertEquals(25, animalRepository.findOlderAnimal(10).get(list.get(0)));
+        }
+
+        @Test
+        @DisplayName("Поиск животных старше 5 и дороже средней цены по списку")
+        public void oldAndExpensive() {
+            List<Animal> list = new ArrayList<>();
+            list.add(new Cat("1", "1", BigDecimal.valueOf(10), "1", LocalDate.of(1999, 1, 1)));
+            list.add(new Cat("2", "1", BigDecimal.valueOf(7), "1", LocalDate.of(2012, 1, 1)));
+            list.add(new Cat("3", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2024, 1, 1)));
+            Assertions.assertIterableEquals(List.of(list.get(0), list.get(1)), animalRepository.findOldAndExpensive(list));
+        }
+
+        @Test
+        @DisplayName("Поиск животных c минимальной ценой")
+        public void minCost() {
+            List<Animal> list = new ArrayList<>();
+            list.add(new Cat("1", "1", BigDecimal.valueOf(10), "1", LocalDate.of(1999, 1, 1)));
+            list.add(new Cat("2", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2012, 1, 1)));
+            list.add(new Cat("3", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2024, 1, 1)));
+            Assertions.assertIterableEquals(List.of(list.get(2).getName(), list.get(1).getName()), animalRepository.findMinCostAnimals(list));
         }
     }
 

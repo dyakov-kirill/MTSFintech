@@ -1,22 +1,22 @@
 package ru.mtsbank.repositories.exceptions;
 
-public class WrongListSizeArgument extends Exception {
-    public WrongListSizeArgument() {
+public class WrongListArgumentSize extends Exception {
+    public WrongListArgumentSize() {
     }
 
-    public WrongListSizeArgument(String message) {
+    public WrongListArgumentSize(String message) {
         super(message);
     }
 
-    public WrongListSizeArgument(String message, Throwable cause) {
+    public WrongListArgumentSize(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public WrongListSizeArgument(Throwable cause) {
+    public WrongListArgumentSize(Throwable cause) {
         super(cause);
     }
 
-    public WrongListSizeArgument(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public WrongListArgumentSize(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

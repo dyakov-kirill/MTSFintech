@@ -1,11 +1,17 @@
-package ru.mtsbank;
+package ru.mtsbank.spring;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import ru.mtsbank.entity.Animal;
+import ru.mtsbank.entity.Cat;
 import ru.mtsbank.repositories.AnimalRepository;
+import ru.mtsbank.repositories.exceptions.NegativeArgumentException;
+import ru.mtsbank.repositories.exceptions.NullPointerArgumentException;
+import ru.mtsbank.repositories.exceptions.WrongListArgumentSize;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -31,8 +37,13 @@ public class SchedulerConfig {
                 System.out.println(key + " = " + leapYearNames.get(key));
             }
             repository.printDuplicate();
-        } catch (Exception e) {
-
+            repository.findMinCostAnimals(List.of(new Cat("1", "1", BigDecimal.ONE, "1", LocalDate.of(1, 1, 1))));
+        } catch (NegativeArgumentException e) {
+            System.out.println("Negative argument exception was thrown. Message: " + e.getMessage());
+        } catch (NullPointerArgumentException e) {
+            System.out.println("Null pointer argument exception was thrown. Message: " + e.getMessage());
+        } catch (WrongListArgumentSize e) {
+            System.out.println("Wrong list size exception was thrown. Message: " + e.getMessage());
         }
     }
 }

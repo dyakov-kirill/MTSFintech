@@ -12,6 +12,8 @@ import ru.mtsbank.entity.AnimalType;
 import ru.mtsbank.entity.Cat;
 import ru.mtsbank.entity.Dog;
 import ru.mtsbank.repositories.AnimalRepositoryImpl;
+import ru.mtsbank.repositories.exceptions.WrongListArgumentSize;
+import ru.mtsbank.spring.ApplicationConfiguration;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -103,7 +105,11 @@ public class ApplicationTest {
             list.add(new Cat("1", "1", BigDecimal.valueOf(10), "1", LocalDate.of(1999, 1, 1)));
             list.add(new Cat("2", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2012, 1, 1)));
             list.add(new Cat("3", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2024, 1, 1)));
-            Assertions.assertIterableEquals(List.of(list.get(2).getName(), list.get(1).getName()), animalRepository.findMinCostAnimals(list));
+            try {
+                Assertions.assertIterableEquals(List.of(list.get(2).getName(), list.get(1).getName()), animalRepository.findMinCostAnimals(list));
+            } catch (WrongListArgumentSize e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

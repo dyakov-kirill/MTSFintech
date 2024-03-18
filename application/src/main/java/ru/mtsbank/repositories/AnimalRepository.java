@@ -2,6 +2,7 @@ package ru.mtsbank.repositories;
 
 import org.springframework.stereotype.Repository;
 import ru.mtsbank.entity.Animal;
+import ru.mtsbank.repositories.exceptions.WrongListArgumentSize;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -58,5 +59,5 @@ public interface AnimalRepository {
      * @param animals список животных
      * @return список имен, отсортированный в обратном алфавитном порядке
      */
-    List<String> findMinCostAnimals(List<Animal> animals);
+    List<String> findMinCostAnimals(List<Animal> animals) throws WrongListArgumentSize;
 }

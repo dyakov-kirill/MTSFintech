@@ -1,5 +1,6 @@
 package ru.mtsbank.spring;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import ru.mtsbank.entity.Animal;
@@ -21,6 +22,45 @@ public class SchedulerConfig {
 
     public SchedulerConfig(AnimalRepository repository) {
         this.repository = repository;
+        //repository.addDuplicates(4);
+    }
+
+    @PostConstruct
+    private void postConstruct() {
+        repository.addDuplicates(4);
+        Thread printThread = new Thread("PrintDuplicateThread") {
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        System.out.print(this.getName() + ": \n");
+                        repository.printDuplicate();
+                        Thread.sleep(10000);
+                    }
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+
+        Thread findAverageThread = new Thread("FindAverageAgeThread") {
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        System.out.print(this.getName() + ": \n");
+                        List<Animal> animalsList = repository.getAnimals().values().stream().flatMap(List::stream).toList();
+                        repository.findAverageAge(animalsList);
+                        Thread.sleep(20500);
+                    }
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+
+        printThread.start();
+        findAverageThread.start();
     }
 
     @Scheduled(fixedDelay = 60000)
@@ -36,7 +76,6 @@ public class SchedulerConfig {
             for (String key : leapYearNames.keySet()) {
                 System.out.println(key + " = " + leapYearNames.get(key));
             }
-            repository.printDuplicate();
             repository.findMinCostAnimals(List.of(new Cat("1", "1", BigDecimal.ONE, "1", LocalDate.of(1, 1, 1))));
         } catch (NegativeArgumentException e) {
             System.out.println("Negative argument exception was thrown. Message: " + e.getMessage());

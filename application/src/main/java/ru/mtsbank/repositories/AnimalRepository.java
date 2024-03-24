@@ -60,4 +60,18 @@ public interface AnimalRepository {
      * @return список имен, отсортированный в обратном алфавитном порядке
      */
     List<String> findMinCostAnimals(List<Animal> animals) throws WrongListArgumentSize;
+
+    /**
+     * Возвращает коллекцию с животными
+     *
+     * @return мапа с животными
+     */
+    Map<String, List<Animal>> getAnimals();
+
+    /**
+     * Добавляет N дубликатов животных
+     *
+     * @param n количество дубликатов
+     */
+    void addDuplicates(int n);
 }

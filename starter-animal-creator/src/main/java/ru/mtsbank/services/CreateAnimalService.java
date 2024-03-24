@@ -5,14 +5,16 @@ import ru.mtsbank.entity.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public interface CreateAnimalService {
 
-    default Map<String, List<Animal>> createAnimals(AnimalType animalType) {
+    default ConcurrentMap<String, List<Animal>> createAnimals(AnimalType animalType) {
         int i = 0;
         Random rand = new Random();
-        Map<String, List<Animal>> res = new HashMap<>();
-        while (i++ < 10) {
+        ConcurrentMap<String, List<Animal>> res = new ConcurrentHashMap<>();
+        while (i++ < 50) {
             AbstractAnimal animal;
             switch (animalType) {
                 case DOG -> {

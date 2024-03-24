@@ -6,6 +6,8 @@ import ru.mtsbank.entity.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
 
@@ -31,9 +33,9 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
      * @return массив из 10 животных типа animalType
      */
     @Override
-    public Map<String, List<Animal>> createAnimals(AnimalType animalType) {
+    public ConcurrentMap<String, List<Animal>> createAnimals(AnimalType animalType) {
         Random rand = new Random();
-        Map<String, List<Animal>> res = new HashMap<>();
+        ConcurrentMap<String, List<Animal>> res = new ConcurrentHashMap<>();
         AnimalType actualType = animalType;
         if (this.animalType != null) {
             actualType = this.animalType;
@@ -97,12 +99,12 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
      * @param N          количество возвращаемых животных
      * @return массив из N животных типа animalType
      */
-    public Map<String, List<Animal>> createAnimals(Integer N) {
+    public ConcurrentMap<String, List<Animal>> createAnimals(Integer N) {
         if (N == null || N <= 0) {
-            return new HashMap<String, List<Animal>>();
+            return new ConcurrentHashMap<String, List<Animal>>();
         }
         Random rand = new Random();
-        Map<String, List<Animal>> res = new HashMap<>();
+        ConcurrentMap<String, List<Animal>> res = new ConcurrentHashMap<>();
         System.out.println(catNames);
         for (int i = 0; i < N; i++) {
             AbstractAnimal animal;

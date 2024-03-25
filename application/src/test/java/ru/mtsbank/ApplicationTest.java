@@ -12,10 +12,14 @@ import ru.mtsbank.entity.AnimalType;
 import ru.mtsbank.entity.Cat;
 import ru.mtsbank.entity.Dog;
 import ru.mtsbank.repositories.AnimalRepositoryImpl;
+import ru.mtsbank.repositories.exceptions.WrongListArgumentSize;
+import ru.mtsbank.spring.ApplicationConfiguration;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 @SpringBootTest(classes = ApplicationConfiguration.class)
 public class ApplicationTest {
@@ -47,7 +51,7 @@ public class ApplicationTest {
         public void findDuplicate() {
             List<Animal> list1 = new ArrayList<>();
             List<Animal> list2 = new ArrayList<>();
-            Map<String, List<Animal>> animals = new HashMap<>();
+            ConcurrentMap<String, List<Animal>> animals = new ConcurrentHashMap<>();
             list1.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
             list1.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
             list1.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
@@ -66,7 +70,7 @@ public class ApplicationTest {
         @DisplayName("Поиск високосных лет")
         public void findLeapYears() {
             List<Animal> list = new ArrayList<>();
-            Map<String, List<Animal>> animals = new HashMap<>();
+            ConcurrentMap<String, List<Animal>> animals = new ConcurrentHashMap<>();
             list.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2024, 1, 1)));
             list.add(new Cat("2", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1, 1, 1)));
             animals.put(AnimalType.CAT.toString(), list);
@@ -78,7 +82,7 @@ public class ApplicationTest {
         @DisplayName("Поиск животных страше 10")
         public void findOlderThan10() {
             List<Animal> list = new ArrayList<>();
-            Map<String, List<Animal>> animals = new HashMap<>();
+            ConcurrentMap<String, List<Animal>> animals = new ConcurrentHashMap<>();
             list.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1999, 1, 1)));
             list.add(new Cat("2", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2024, 1, 1)));
             animals.put(AnimalType.CAT.toString(), list);
@@ -103,7 +107,11 @@ public class ApplicationTest {
             list.add(new Cat("1", "1", BigDecimal.valueOf(10), "1", LocalDate.of(1999, 1, 1)));
             list.add(new Cat("2", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2012, 1, 1)));
             list.add(new Cat("3", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2024, 1, 1)));
-            Assertions.assertIterableEquals(List.of(list.get(2).getName(), list.get(1).getName()), animalRepository.findMinCostAnimals(list));
+            try {
+                Assertions.assertIterableEquals(List.of(list.get(2).getName(), list.get(1).getName()), animalRepository.findMinCostAnimals(list));
+            } catch (WrongListArgumentSize e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -133,7 +141,7 @@ public class ApplicationTest {
         @DisplayName("Отсутствие животных старше 10")
         public void noOlderThan10() {
             List<Animal> list = new ArrayList<>();
-            Map<String, List<Animal>> animals = new HashMap<>();
+            ConcurrentMap<String, List<Animal>> animals = new ConcurrentHashMap<>();
             list.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(1999, 1, 1)));
             list.add(new Cat("1", "1", BigDecimal.valueOf(1), "1", LocalDate.of(2024, 1, 1)));
             animals.put(AnimalType.CAT.toString(), list);
